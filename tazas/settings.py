@@ -25,7 +25,7 @@ SECRET_KEY = '7=s4dzb@osd^$ow@1_mbp^bgg!mzmio#g(0r29kfn509cj1&=8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django2-freddy93.c9users.io']
 
 
 # Application definition
@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'EntradaMercanciaAPP.apps.EntradamercanciaappConfig',
+    'material',
+    'material.frontend',
+    
 ]
 
 MIDDLEWARE = [

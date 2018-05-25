@@ -1,0 +1,64 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block title %}<title>Entradas de Mercancia</title>{% endblock %}
+
+{% block content %}
+
+<h3>Aquí van los filtros</h3>
+<div><button type="button" class="btn btn-success">Nueva Entrada</button></div>
+
+  
+{% if entradas %} 
+<table id="tabla" class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      
+      <th scope="col">Folio</th>
+      <th scope="col">Proveedor</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Costo Total</th>
+      <th scope="col">Cantidad Total</th>
+      <th scope="col">Comentarios</th>
+      <th scope="col">Imprimir</th>
+      <th scope="col">Detalle</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+      
+        <tr>
+            {% for e in entradas %}
+            <th scope="row">{{ e.folio }}</th>
+            <td>{{ e.idProveedorFk }}</td>
+            <td>{{ e.fecha }}</td>
+            <td>{{ e.costoTotal }}</td>
+            <td>{{ e.cantidadTotal }}</td>
+            <td>{{ e.comentarios }}</td>
+            <td><p data-placement="top" data-toggle="tooltip" title="View"><button class="btn btn-primary btn-xs" data-title="Print" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-print"></span></button></p></td>
+            <td><p data-placement="top" data-toggle="tooltip" title="View"><button class="btn btn-primary btn-xs" data-title="View" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-search"></span></button></p></td>
+            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+
+            {% endfor %}
+            </ul>
+        </tr>
+	  
+ 
+  </tbody>
+  
+</table>  
+{% else %}
+<p>No hay registros.</p>
+{% endif %}
+{% block js %}	  
+<script type = "text/javascript">
+    $(document).ready(function(){
+        $('#tabla').DataTable();
+    });
+</script>	 
+{% endblock js %}
+{% endblock %}
+

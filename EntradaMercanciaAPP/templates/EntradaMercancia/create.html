@@ -1,0 +1,116 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Nueva Entrada de Mercancia</h1>
+<div><button type="button" class="btn btn-success">Finalizar</button>
+<button type="button" class="btn btn-danger">Cancelar</button></div>
+<div>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+        <label for="exampleFormControlSelect1">Proveedor</label>
+        <select class="form-control" id="prove">
+        {% for pro in listaProveedores %}
+          <option>{{pro.nombre}}</option>
+        {% endfor %}
+        </select>
+    </div>
+    
+      <div class="form-group col-md-3">
+        <label for="formGroupExampleInput">Remision</label>
+        <input type="text" class="form-control" id="remi">
+      </div>
+      
+      <div class="form-group col-md-5">
+        <label for="exampleFormControlTextarea1">Comentarios</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+      </div>
+  </div>
+</form>
+</div> 
+  
+<div>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+        <label for="exampleFormControlSelect1">Producto</label>
+        <select class="form-control" id="product">
+          
+        {% for prod in listaProductos %}
+          <option>{{prod.nombre}}</option>
+        {% endfor %}
+        
+        </select>
+    </div>
+    
+      <div class="form-group col-md-2">
+        <label for="formGroupExampleInput">Cantidad</label>
+        <input type="text" class="form-control" id="formGroupExampleInput">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="formGroupExampleInput2">Costo</label>
+        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Costo por unidad">
+      </div>
+      
+      <div class="form-group col-md-3">
+        <label for="exampleFormControlTextarea1">Comentarios</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+      </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Agregar</button>
+</form>
+</div> 
+{% if listaProductosCarrito %} 
+<table id="tablaProductos" class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Costo</th>
+      <th scope="col">Cantidad Total</th>
+      <th scope="col">Comentarios</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+      
+        <tr>
+            {% for p in listaProductosCarrito %}
+            <th scope="row">{{ p.id }}</th>
+            <td>{{ p.idProductoFk }}</td>
+            <td>{{ p.cantidad }}</td>
+            <td>{{ p.costo }}</td>
+            <td>$0.00</td>
+            <td>{{ p.comentarios }}</td>
+
+            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+
+            {% endfor %}
+            </ul>
+        </tr>
+	  
+ 
+  </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="2" style="text-align:right">Cantidad Total:</th>
+                <th></th>
+                <th style="text-align:right">Costo Total:</th>
+                <th></th>
+            </tr>
+        </tfoot>
+  
+</table>  
+{% else %}
+	    <p>No hay registros.</p>
+	  {% endif %}
+	  
+<script type = "text/javascript">
+    $(document).ready(function(){
+        $('#tablaProductos').DataTable();
+    });
+</script>	  
+{% endblock %}
